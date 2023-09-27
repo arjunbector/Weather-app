@@ -5,7 +5,6 @@ A simple weather app built using React to display weather information.
 ## Table of Contents
 - [Features](#features)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [Contact](#Contact)
 
 ## Features
