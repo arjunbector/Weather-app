@@ -1,15 +1,17 @@
-import { useState } from 'react'
-import {Data} from './Components/Data'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Card from "./Components/Card/Card";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState(0);
+  const [location, setLocation] = useState("Mumbai");
   return (
     <>
-    <Data/>
+      <main>
+        <Card location={location} />
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,6 +1,23 @@
 #root {
   max-width: 1280px;
+  height: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: "Poppins";
+}
+
+
+body{
+  /* background-color: red; */
+  height: 100vh;
+  background : url("https://source.unsplash.com/1600x900/?delhi") no-repeat center center/cover; 
+}
+
+main{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
