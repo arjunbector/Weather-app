@@ -14,7 +14,9 @@ A simple weather app built using React to display weather information.
 - Responsive design for various devices.
 
 ## Usage
-- Search for the desired location and either press enter or the search icon for the results.
+Search for the desired location and either press enter or the search icon for the results.
+
+Try it <a href= "https://arjun-weather-app.netlify.app/">here<a/>
 
 ## Contact
 For any queries or suggestions, feel free to reach out:\
