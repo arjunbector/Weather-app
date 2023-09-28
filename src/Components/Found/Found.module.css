@@ -19,7 +19,7 @@
     font-size: 25px;
     align-items: center;
 
-    img{
+    :is(img){
         margin-left: 5px;
         height: 40px;
     }
