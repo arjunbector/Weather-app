@@ -1,0 +1,34 @@
+.locationName{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.weatherDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.temp{
+    font-size: 30px;
+}
+.weatherDetails .mainWeather{
+    display: flex;
+    font-size: 25px;
+    align-items: center;
+
+    img{
+        margin-left: 5px;
+        height: 40px;
+    }
+}
+
+.secDetails{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 15px;
+}

@@ -6,7 +6,7 @@
     height: 350px;
     width: 350px;
     border-radius: 40px;
-    align-items: flex-start;
+    align-content: space-around;
     justify-content: center;
     color: white;
 }
@@ -40,9 +40,3 @@
     cursor: pointer;
 }
 
-.locationName{
-    display: flex;
-    justify-content: flex-start;
-    font-size: 40px;
-    font-weight: 500;
-}

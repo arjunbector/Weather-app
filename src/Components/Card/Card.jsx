@@ -1,29 +1,33 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import styles from "./Card.module.css";
+import Found from "../Found/Found";
 import { AiOutlineSearch } from "react-icons/ai";
+import styles from "./Card.module.css";
 
-const Card = ({ location }) => {
+
+const Card = () => {
   const [data, setData] = useState(null);
-  async function getData() {
-    // let location = "Vellore".toLowerCase();
+  const [location, setLocation] = useState("Delhi");
+  const searchBoxChangeHandler = (e) => {
+    setLocation((prev) => e.target.value.toLowerCase());
+    if (e.key == "Enter") {
+      getData(e.target.value);
+    }
+  };
+
+  async function getData(loc) {
     let api_key = "044253218f70c57471b31e819f0bf922";
     let data = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${api_key}`
     );
     let parsedData = await data.json();
-    console.log(parsedData);
     setData(parsedData);
   }
   useEffect(() => {
-    getData();
+    getData(location);
   }, []);
   return (
     <>
-      {/* <p>{data ? data.name : "Loading..."}</p>
-      <p>{data ? data.main.temp : "Loading..."}</p>
-      <p>{data ? data.weather[0].main : "Loading..."}</p>
-      <p>{data ? data.wind.speed : "Loading..."}</p> */}
       <div className={styles.card}>
         <div className={styles.content}>
           <div className={styles.search}>
@@ -31,19 +35,16 @@ const Card = ({ location }) => {
               type="text"
               className={styles.searchBox}
               placeholder="Search"
+              onChange={searchBoxChangeHandler}
+              onKeyUp={searchBoxChangeHandler}
             />
-            <AiOutlineSearch className={styles.searchIcon} />
-          </div>
-
-          <div className={styles.locationName}>
-            {data ? data.name : "Loading..."}
-          </div>
-          <div className={styles.weatherDetails}>
-            <p>Temperature: {data ? (data.main.temp - 273).toFixed(2) + " °C" : "Loading"}</p>
-            <p>Humidity: {data ? data.main.humidity : "Loading"} %</p>
-            <p>Wind Speed: {data ? data.wind.speed : "Loading"} km/h</p>
-          </div>
-        </div>
+            <AiOutlineSearch
+              className={styles.searchIcon}
+              onClick={() => {
+                getData(location);
+              }}
+            />
+          </div>{data ? (data.cod == 200 ?  <Found data={data} />: "Location not found"):"Loading..."}</div>
       </div>
     </>
   );
