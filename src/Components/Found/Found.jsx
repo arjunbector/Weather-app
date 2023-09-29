@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Found.module.css";
-import { AiOutlineSearch } from "react-icons/ai";
+import CustomButton from "../CustomButton/CustomButton";
 
-const Found = ({ data }) => {
+const Found = ({ data, getLocation }) => {
   return (
     <>
       <div className={styles.locationName}>
@@ -24,6 +24,7 @@ const Found = ({ data }) => {
         <div className={styles.secDetails}>
           <p>Humidity: {data ? data.main.humidity : "Loading"} %</p>
           <p>Wind Speed: {data ? data.wind.speed : "Loading"} km/h</p>
+          <CustomButton getLocation={getLocation}/>
         </div>
       </div>
     </>
