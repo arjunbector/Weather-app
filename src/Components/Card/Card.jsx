@@ -6,7 +6,7 @@ import styles from "./Card.module.css";
 import axios from "axios";
 
 const Card = () => {
-  const API_endpoint = `http://api.openweathermap.org/geo/1.0/reverse?`;
+  const API_endpoint = `https://api.openweathermap.org/geo/1.0/reverse?`;
   const [data, setData] = useState(null);
   const [location, setLocation] = useState("Delhi");
   const searchBoxChangeHandler = (e) => {
