@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Found from "../Found/Found";
 import { AiOutlineSearch } from "react-icons/ai";
 import styles from "./Card.module.css";
+import LocationComp from "../LocationComp/LocationComp";
 
 
 const Card = () => {
@@ -45,6 +46,7 @@ const Card = () => {
               }}
             />
           </div>{data ? (data.cod == 200 ?  <Found data={data} />: "Location not found"):"Loading..."}</div>
+          <LocationComp/>
       </div>
     </>
   );
