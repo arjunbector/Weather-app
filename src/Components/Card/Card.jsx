@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import Found from "../Found/Found";
 import { AiOutlineSearch } from "react-icons/ai";
 import styles from "./Card.module.css";
-import LocationComp from "../LocationComp/LocationComp";
-
+import axios from "axios";
 
 const Card = () => {
+  const API_endpoint = `http://api.openweathermap.org/geo/1.0/reverse?`;
   const [data, setData] = useState(null);
   const [location, setLocation] = useState("Delhi");
   const searchBoxChangeHandler = (e) => {
@@ -18,7 +18,9 @@ const Card = () => {
 
   async function getData(loc) {
     let data = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${import.meta.env.VITE_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${
+        import.meta.env.VITE_API_KEY
+      }`
     );
     let parsedData = await data.json();
     setData(parsedData);
@@ -26,6 +28,33 @@ const Card = () => {
   useEffect(() => {
     getData(location);
   }, []);
+
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+
+      getLocation();
+    });
+  }, [latitude, longitude]);
+
+  async function getLocation() {
+    let loc;
+    await axios
+      .get(
+        `${API_endpoint}lat=${latitude}&lon=${longitude}&limit=5&appid=${
+          import.meta.env.VITE_API_KEY
+        }`
+      )
+      .then((response) => {
+      getData(response.data[0].name);
+
+      });
+    return loc;
+  }
+
   return (
     <>
       <div className={styles.card}>
@@ -44,11 +73,20 @@ const Card = () => {
                 getData(location);
               }}
             />
-          </div>{data ? (data.cod == 200 ?  <Found data={data} />: "Location not found"):"Loading..."}</div>
-          <LocationComp/>
+          </div>
+          {data ? (
+            data.cod == 200 ? (
+              <Found data={data} getLocation = {getLocation} />
+            ) : (
+              "Location not found"
+            )
+          ) : (
+            "Loading..."
+          )}
+        </div>
       </div>
     </>
   );
 };
 
-export default Card;
+export {Card};
