@@ -24,6 +24,7 @@ const Found = ({ data }) => {
         <div className={styles.secDetails}>
           <p>Humidity: {data ? data.main.humidity : "Loading"} %</p>
           <p>Wind Speed: {data ? data.wind.speed : "Loading"} km/h</p>
+          {/* <p>api key = {process.env.REACT_APP_API_KEY}</p> */}
         </div>
       </div>
     </>

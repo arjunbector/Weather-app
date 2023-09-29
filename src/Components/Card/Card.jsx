@@ -17,9 +17,8 @@ const Card = () => {
   };
 
   async function getData(loc) {
-    let api_key = "044253218f70c57471b31e819f0bf922";
     let data = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${import.meta.env.VITE_API_KEY}`
     );
     let parsedData = await data.json();
     setData(parsedData);
