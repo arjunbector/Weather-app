@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Found.module.css";
 import CustomButton from "../CustomButton/CustomButton";
 
-const Found = ({ data, getLocation }) => {
+const Found = ({ data, getLocation, setInputValue }) => {
   return (
     <>
       <div className={styles.locationName}>
@@ -24,7 +24,10 @@ const Found = ({ data, getLocation }) => {
         <div className={styles.secDetails}>
           <p>Humidity: {data ? data.main.humidity : "Loading"} %</p>
           <p>Wind Speed: {data ? data.wind.speed : "Loading"} km/h</p>
-          <CustomButton getLocation={getLocation}/>
+          <CustomButton 
+          getLocation= {getLocation}
+          setInputValue = {setInputValue}
+          />
         </div>
       </div>
     </>

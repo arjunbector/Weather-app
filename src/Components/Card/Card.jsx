@@ -9,7 +9,13 @@ const Card = () => {
   const API_endpoint = `https://api.openweathermap.org/geo/1.0/reverse?`;
   const [data, setData] = useState(null);
   const [location, setLocation] = useState("Delhi");
+  const [inputValue, setInputValue] = useState("");
+  useEffect(()=>{
+    document.body.style.background = `url("https://source.unsplash.com/1600x900/?clouds")`
+  },[])
+
   const searchBoxChangeHandler = (e) => {
+    setInputValue(e.target.value);
     setLocation((prev) => e.target.value.toLowerCase());
     if (e.key == "Enter") {
       getData(e.target.value);
@@ -64,6 +70,7 @@ const Card = () => {
               type="text"
               className={styles.searchBox}
               placeholder="Search"
+              value={inputValue}
               onChange={searchBoxChangeHandler}
               onKeyUp={searchBoxChangeHandler}
             />
@@ -71,12 +78,17 @@ const Card = () => {
               className={styles.searchIcon}
               onClick={() => {
                 getData(location);
+                console.log(data.weather[0].main);
               }}
             />
           </div>
           {data ? (
             data.cod == 200 ? (
-              <Found data={data} getLocation = {getLocation} />
+              <Found 
+              data={data}
+              getLocation = {getLocation}
+              setInputValue = {setInputValue}
+               />
             ) : (
               "Location not found"
             )
