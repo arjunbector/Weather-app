@@ -4,6 +4,7 @@ import Found from "../Found/Found";
 import { AiOutlineSearch } from "react-icons/ai";
 import styles from "./Card.module.css";
 import axios from "axios";
+import CustomButton from "../CustomButton/CustomButton";
 
 const Card = () => {
   const API_endpoint = `https://api.openweathermap.org/geo/1.0/reverse?`;
@@ -96,6 +97,10 @@ const Card = () => {
             "Loading..."
           )}
         </div>
+        <CustomButton 
+            getLocation= {getLocation}
+            setInputValue = {setInputValue}
+            />
       </div>
     </>
   );

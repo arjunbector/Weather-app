@@ -1,6 +1,10 @@
 .card{
     display: flex;
+    flex-direction: column;
+    flex-grow:unset;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.413);
+
     backdrop-filter: blur(3px);
     height: 350px;
     width: 350px;
