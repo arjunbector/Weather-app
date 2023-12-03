@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import Found from "../Found/Found";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -11,31 +10,32 @@ const Card = () => {
   const [data, setData] = useState(null);
   const [location, setLocation] = useState("Delhi");
   const [inputValue, setInputValue] = useState("");
-  useEffect(()=>{
-    document.body.style.background = `url("https://source.unsplash.com/1600x900/?clouds")`
-  },[])
+  useEffect(() => {
+    document.body.style.background = `url("https://source.unsplash.com/1600x900/?clouds")`;
+  }, []);
 
-  const searchBoxChangeHandler = (e) => {
-    setInputValue(e.target.value);
-    setLocation((prev) => e.target.value.toLowerCase());
-    if (e.key == "Enter") {
-      getData(e.target.value);
-    }
-  };
 
-  async function getData(loc) {
-    let data = await fetch(
+
+  const getData = (loc) => {
+    fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${
         import.meta.env.VITE_API_KEY
       }`
-    );
-    let parsedData = await data.json();
-    setData(parsedData);
-  }
+    )
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  };
   useEffect(() => {
     getData(location);
   }, []);
 
+  const searchBoxChangeHandler = (e) => {
+    setInputValue(e.target.value);
+    setLocation(e.target.value.toLowerCase());
+    if (e.key == "Enter") {
+      getData(e.target.value);
+    }
+  };
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   useEffect(() => {
@@ -56,8 +56,7 @@ const Card = () => {
         }`
       )
       .then((response) => {
-      getData(response.data[0].name);
-
+        getData(response.data[0].name);
       });
     return loc;
   }
@@ -85,11 +84,11 @@ const Card = () => {
           </div>
           {data ? (
             data.cod == 200 ? (
-              <Found 
-              data={data}
-              getLocation = {getLocation}
-              setInputValue = {setInputValue}
-               />
+              <Found
+                data={data}
+                getLocation={getLocation}
+                setInputValue={setInputValue}
+              />
             ) : (
               "Location not found"
             )
@@ -97,13 +96,10 @@ const Card = () => {
             "Loading..."
           )}
         </div>
-        <CustomButton 
-            getLocation= {getLocation}
-            setInputValue = {setInputValue}
-            />
+        <CustomButton getLocation={getLocation} setInputValue={setInputValue} />
       </div>
     </>
   );
 };
 
-export {Card};
+export { Card };

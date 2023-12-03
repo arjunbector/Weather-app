@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Found.module.css";
 
 const Found = ({ data }) => {
